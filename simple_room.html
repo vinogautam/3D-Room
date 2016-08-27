@@ -1,0 +1,80 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<style>
+body{width:50%;margin:100px auto 0;text-align: center;}
+.simple_room{position: absolute;transform-style: preserve-3d;width:300px;height:300px;left:0;right: 0;margin: auto;}
+.walls{opacity:0.5;position: absolute;height: 300px;transform-style: preserve-3d;}
+.roofs{opacity:0.5;position: absolute;transform-style: preserve-3d;}
+.room1{background: red;}
+.room2{background: green;}
+.front{width:300px;transform: translateZ(150px);display: none;}
+.back{left: 100px;}
+.back1{width:100px;transform: translateX(-100px) translateZ(-50px) rotateX(-180deg);}
+.back2{width:100px;transform: rotateX(-180deg) translateZ(150px);}
+.back3{width:100px;transform: translateX(100px) translateZ(-50px) rotateX(-180deg);}
+.side1{width:200px;transform: rotateY(90deg) translateX(-50px) translateZ(150px);left:50px;}
+.side2{width:200px;transform: rotateY(-90deg) translateX(50px) translateZ(150px);left:50px;}
+.side3{width:100px;left:100px;transform: rotateY(90deg) translateX(100px) translateZ(50px)}
+.side4{width:100px;left:100px;transform: rotateY(-90deg) translateX(-100px) translateZ(50px)}
+.bottom1{width:300px;height: 200px;transform: rotateX(90deg) translateY(50px) translateZ(150px);top:50px;}
+.bottom2{width:100px;height: 100px;left: 100px;transform: rotateX(90deg) translateY(-100px) translateZ(150px);top:100px;}
+.top1{width:300px;height: 200px;transform: rotateX(-90deg) translateY(-50px) translateZ(150px);top:50px;}
+.top2{width:100px;height: 100px;left: 100px;transform: rotateX(-90deg) translateY(100px) translateZ(150px);top:100px;}
+</style>
+<div class="simple_room animation">
+	<div class="walls room1 front">
+	</div>
+	<div class="walls room1 back back1">
+	</div>
+	<div class="walls room2 back back2">
+	</div>
+	<div class="walls room1 back back3">
+	</div>
+	<div class="walls room1 side side1">
+	</div>
+	<div class="walls room1 side side2">
+	</div>
+	<div class="walls room2 side side3">
+	</div>
+	<div class="walls room2 side side4">
+	</div>
+	<div class="roofs room1 bottom bottom1">
+	</div>
+	<div class="roofs room2 bottom bottom2">
+	</div>
+	<div class="roofs room1 top top1">
+	</div>
+  <div class="roofs room2 top top2">
+  </div>
+</div>
+
+<script>
+var color = [
+    "cornflowerblue", 
+    "olivedrab", 
+    "orange", 
+    "tomato", 
+    "crimson", 
+    "purple", 
+    "turquoise", 
+    "forestgreen", 
+    "navy", 
+    "gray"
+  ];
+  $(".walls").each(function(i,v){
+	$(this).css("background", color[i%10]);
+  });
+
+var perspective = 500;
+$(".simple_room").css("perspective", perspective +'px');
+
+$(document).bind('DOMMouseScroll', function(e){
+     if(e.originalEvent.detail > 0) {
+      perspective -= 50;
+      $(".simple_room").css("perspective", perspective+'px');
+     }else {
+      perspective += 50;
+      $(".simple_room").css("perspective", perspective+'px');
+     }
+     return false;
+ });
+</script>
